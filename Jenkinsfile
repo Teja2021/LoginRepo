@@ -7,7 +7,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                checkout([$class: 'GitSCM', branches: [[name: '*/main']], userRemoteConfigs: [[url: 'https://github.com/Teja2021/LoginRepo.git']]])
+               git branch: 'main', url: 'https://github.com/Teja2021/LoginRepo.git'
             }
         }
 
