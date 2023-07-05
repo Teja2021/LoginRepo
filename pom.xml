@@ -62,120 +62,133 @@
 
 <build>
 
-        <plugins>
+    <plugins>
 
-              
+        <!-- Add other plugins here -->
 
-  <plugin>
+        
 
-    <groupId>org.sonarsource.scanner.maven</groupId>
+        <plugin>
 
-    <artifactId>sonar-maven-plugin</artifactId>
+            <groupId>org.sonarsource.scanner.maven</groupId>
 
-    <version>3.9.0.2155</version>
+            <artifactId>sonar-maven-plugin</artifactId>
 
-  </plugin>
+            <version>3.9.0.2155</version>
 
-  <plugin>
+        </plugin>
 
-    <groupId>org.jacoco</groupId>
+        
 
-    <artifactId>jacoco-maven-plugin</artifactId>
+        <plugin>
 
-    <version>0.8.10</version>
+      <groupId>org.jacoco</groupId>
 
-    <executions>
+      <artifactId>jacoco-maven-plugin</artifactId>
+
+      <version>0.8.7</version>
+
+      <executions>
 
         <execution>
 
-            <id>jacoco-initialize</id>
+          <id>prepare-agent</id>
 
-            <goals>
+          <goals>
 
-                <goal>prepare-agent</goal>
+            <goal>prepare-agent</goal>
 
-            </goals>
+          </goals>
 
         </execution>
 
         <execution>
 
-            <id>jacoco-site</id>
+          <id>report</id>
 
-            <phase>package</phase>
+          <phase>prepare-package</phase>
 
-            <goals>
+          <goals>
 
-                <goal>report</goal>
+            <goal>report</goal>
 
-            </goals>
+          </goals>
 
         </execution>
 
-    </executions>
+      </executions>
 
-</plugin>
+    </plugin>
 
-   <plugin>
+        
 
-                <groupId>org.apache.maven.plugins</groupId>
+        <plugin>
 
-                <artifactId>maven-surefire-plugin</artifactId>
+            <groupId>org.apache.maven.plugins</groupId>
 
-                <version>3.0.0-M5</version>
+            <artifactId>maven-surefire-plugin</artifactId>
 
-                <configuration>
+            <version>3.0.0</version>
 
-                    <argLine>${argLine}</argLine>
+            <configuration>
 
-                    <includes>
+                <argLine>${argLine}</argLine>
 
-                        <include>**/*Test.java</include>
+                <includes>
 
-                    </includes>
+                    <include>**/*Test.java</include>
 
-                    <properties>
+                </includes>
 
-                        <property>
+                <properties>
 
-                            <name>listener</name>
+                    <property>
 
-                            <value>org.sonar.java.jacoco.JUnitListener</value>
+                        <name>listener</name>
 
-                        </property>
+                        <value>org.sonar.java.jacoco.JUnitListener</value>
 
-                    </properties>
+                    </property>
 
-                </configuration>
+                </properties>
 
-                <dependencies>
+            </configuration>
 
-                    <dependency>
+            <dependencies>
 
-                        <groupId>org.sonarsource.java</groupId>
+               <!-- https://mvnrepository.com/artifact/org.sonarsource.java/sonar-jacoco-listeners -->
 
-                        <artifactId>sonar-jacoco-listeners</artifactId>
+<dependency>
 
-                        <version>5.3.0.13877</version>
+    <groupId>org.sonarsource.java</groupId>
 
-                    </dependency>
+    <artifactId>sonar-jacoco-listeners</artifactId>
 
-                </dependencies>
+    <version>5.14.0.18788</version>
 
-            </plugin>
+    
 
-            <plugin>
+</dependency>
 
-                <groupId>org.springframework.boot</groupId>
+ 
 
-                <artifactId>spring-boot-maven-plugin</artifactId>
+            </dependencies>
 
-            </plugin>
+        </plugin>
 
-        </plugins>
+        
 
-    </build>
+        <plugin>
 
+            <groupId>org.springframework.boot</groupId>
+
+            <artifactId>spring-boot-maven-plugin</artifactId>
+
+        </plugin>
+
+    </plugins>
+
+</build>
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
