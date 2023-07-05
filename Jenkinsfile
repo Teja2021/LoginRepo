@@ -1,10 +1,13 @@
 pipeline {
     agent any
+     tools {
+        git '<git-installation>'
+    }
 
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/Teja2021/LoginRepo.git'
+                checkout([$class: 'GitSCM', branches: [[name: '*/main']], userRemoteConfigs: [[url: 'https://github.com/Teja2021/LoginRepo.git']]])
             }
         }
 
