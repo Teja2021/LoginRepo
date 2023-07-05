@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/subbu-Mantrala/AdminModule.git'
+                git 'https://github.com/Teja2021/LoginRepo.git'
             }
         }
 
@@ -33,3 +33,5 @@ pipeline {
         }
     }
 }
+
+has context menu
