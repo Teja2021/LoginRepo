@@ -1,41 +1,35 @@
-node{
-    stage('Checkout'){
-        git branch: 'master' , url:'https://github.com/Teja2021/LoginRepo.git'
-    }
-    stage('Build'){
-        withMaven(maven : 'M3'){
-            bat 'mvn compile'
-        }
-    }
-}
-pipeline{
+pipeline {
     agent any
-    tools{maven 'M3'}
-    stages{
-        stage('Checkout'){
-            steps{
-                git branch:'master',url:'https://github.com/Teja2021/LoginRepo.git'
+
+    stages {
+        stage('Checkout') {
+            steps {
+              checkout([$class: 'GitSCM', branches: [[name: 'main']], userRemoteConfigs: [[url: 'https://github.com/Teja2021/LoginRepo.git']]])
             }
         }
-        stage('Build'){
-            steps{
-                bat 'mvn compile'
+
+        stage('Build') {
+            steps {
+                sh 'mvn clean install'
             }
         }
-        stage('Test'){
-            steps{
-                bat 'mvn test'
+
+        stage('Test') {
+            steps {
+                sh 'mvn test'
             }
         }
-        stage('Package'){
-            steps{
-                bat 'mvn package'
+
+        stage('Package') {
+            steps {
+                sh 'mvn package'
             }
         }
-        stage('Deploy'){
-            steps{
-                echo 'deployed...'
+
+        stage('Deploy') {
+            steps {
+                sh 'mvn deploy'
             }
-        }  
+        }
     }
 }
